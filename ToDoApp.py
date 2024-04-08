@@ -1,5 +1,6 @@
 to_do_list = []
 completed_tasks = []
+high_priority = []
 
 
 def add_task():
@@ -9,10 +10,12 @@ def add_task():
 def view_task():
     print(f"Completed tasks: {completed_tasks}")
     print(f"Task to complete: {to_do_list}")
+    print(f"High priority tasks: {high_priority}")
 
 def mark_complete():
     mark = input("What task would you like to mark as complete? ")
     to_do_list.remove(mark)
+    high_priority.remove(mark)
     completed_tasks.append(mark)
 
 def delete():
@@ -21,6 +24,12 @@ def delete():
         to_do_list.remove(deleted_task)
     if deleted_task in completed_tasks:
         completed_tasks.remove(deleted_task)
+
+def priority():
+    priority = input("What task would you like to mark as high priority? ")
+    if priority in to_do_list:
+        high_priority.append(priority)
+        to_do_list.remove(priority)
 
 
 def to_do_app():
@@ -34,8 +43,9 @@ def to_do_app():
             1. Add a task
             2. View tasks
             3. Mark a task as complete
-            4. Delete a task
-            5. Quit """)
+            4. Mark as high priority
+            5. Delete a task
+            6. Quit """)
             if menu == "1":
                 add_task()
             elif menu == "2":
@@ -43,8 +53,10 @@ def to_do_app():
             elif menu == "3":
                 mark_complete()
             elif menu == "4":
-                delete()
+                priority()
             elif menu == "5":
+                delete()
+            elif menu == "6":
                break
         except ValueError:
             print("Please enter a number between 1 - 5. ")
