@@ -14,10 +14,13 @@ def view_task():
 
 def mark_complete():
     mark = input("What task would you like to mark as complete? ")
-    to_do_list.remove(mark)
-    high_priority.remove(mark)
-    completed_tasks.append(mark)
-
+    if mark not in completed_tasks:
+        completed_tasks.append(mark) 
+        if mark in to_do_list:
+            to_do_list.remove(mark)
+        elif mark in high_priority:
+            high_priority.remove(mark)
+    
 def delete():
     deleted_task = input("What task would you like to delete? ")
     if deleted_task in to_do_list:
